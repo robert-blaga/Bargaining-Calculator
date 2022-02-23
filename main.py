@@ -4,6 +4,7 @@
 # as a Buyer, you propose offers that are at 65 - 85 - 95 - 100% of the target price
 # as a Seller, you propose  offers that are at 135 - 115 - 105 - 100% of the offered price
 
+import re
 
 # Determine the role you have (buyer or seller)
 while True:
@@ -11,7 +12,7 @@ while True:
         role_type = str(input("Are you a buyer or a seller? Type B or S: "))
     except ValueError:
         continue
-    if role_type != "B" and role_type != "S" and role_type != "b" and role_type != "s":
+    if not re.search("^[bs]$", role_type, re.IGNORECASE):
         print(role_type + " is not a known position")
         continue
     else:
@@ -36,7 +37,7 @@ def offers_seller():
     print("Third offer: " + str(int(offer_steps_seller[2])))
     print("Fourth offer: " + str(int(offer_steps_seller[3])))
 
-if role_type == "B":
+if role_type.lower() == "b":
     offers_buyer()
 else:
     offers_seller()
